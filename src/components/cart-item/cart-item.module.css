@@ -16,11 +16,15 @@
   justify-content: space-between;
 }
 
-item__details {
+.item__details {
 }
 
 .item__actions {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.item__title {
+  max-width: 360px;
 }

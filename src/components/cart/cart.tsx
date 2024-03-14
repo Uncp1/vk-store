@@ -3,8 +3,10 @@ import { FC } from 'react';
 import styles from './cart.module.css';
 import CartList from '../cart-list/cart-list';
 import CartTotal from '../cart-total/cart-total';
+import { useAppSelector } from '../../services/hooks/hooks';
 
 const Cart: FC = () => {
+  const { cart } = useAppSelector((state) => state.cart);
   return (
     <div className={styles.cart}>
       <CartList />

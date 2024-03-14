@@ -1,41 +1,34 @@
-import { List } from '@vkontakte/vkui';
-import { FC, useEffect, useState } from 'react';
+import { List, Spinner } from '@vkontakte/vkui';
+import { FC, useEffect } from 'react';
 import styles from './cart-list.module.css';
-import { getItems } from '../../services/api/api';
 import CartItem from '../cart-item/cart-item';
+import { useAppDispatch, useAppSelector } from '../../services/hooks/hooks';
+import { fetchFakeCart } from '../../services/slices/cart-slice';
 
 const CartList: FC = () => {
-  const [items, setItems] = useState([]);
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      const fetchedItems = await getItems();
-      fetchedItems.forEach((item: []) => {
-        console.log(item);
-      });
-      setItems(fetchedItems);
-    };
-
-    fetchItems();
-  }, []);
+    dispatch(fetchFakeCart());
+  }, [dispatch]);
 
   return (
     <List className={styles.list}>
-      {items.length > 0 ? (
-        items.map((item, index) => (
+      {cart.length > 0 ? (
+        cart.map((item, index) => (
           <CartItem
             title={item.title}
             price={item.price}
             image={item.image}
             key={index}
-          >
-            {/* Render your item here */}
-          </CartItem>
+            index={index}
+            amount={1}
+          />
         ))
       ) : (
-        <p>Loading items...</p>
+        <Spinner size="medium" style={{ margin: '20px 0' }} />
       )}
-      <CartItem />
     </List>
   );
 };
