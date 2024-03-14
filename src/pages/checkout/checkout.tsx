@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import Cart from '../../components/cart/cart';
 
-const Checkout: FC = () => {
-  return <section>buba</section>;
+const CheckoutPage: FC = () => {
+  return <Cart />;
 };
 
-export default Checkout;
+export default CheckoutPage;
