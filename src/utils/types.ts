@@ -5,9 +5,5 @@ export type ProductType = {
   category: string;
   description: string;
   image: string;
-  amount?: number;
-};
-
-export type CartType = {
-  cart: ProductType[];
+  amount: number;
 };

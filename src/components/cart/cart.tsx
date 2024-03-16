@@ -6,7 +6,6 @@ import CartTotal from '../cart-total/cart-total';
 import { useAppSelector } from '../../services/hooks/hooks';
 
 const Cart: FC = () => {
-  const { cart } = useAppSelector((state) => state.cart);
   return (
     <div className={styles.cart}>
       <CartList />

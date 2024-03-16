@@ -3,8 +3,17 @@ import { FC } from 'react';
 import styles from './cart-item.module.css';
 import shrekImage from '../../assets/shrek.jpg';
 import { useAppDispatch } from '../../services/hooks/hooks';
-import { removeCartItem } from '../../services/slices/cart-slice';
-import { Icon36Delete } from '@vkontakte/icons';
+import {
+  decreaseItemAmount,
+  increaseItemAmount,
+  removeCartItem,
+} from '../../services/slices/cart-slice';
+import {
+  Icon28AddSquareOutline,
+  Icon28Delete,
+  Icon28MinusSquareOutline,
+  Icon36Delete,
+} from '@vkontakte/icons';
 
 interface CartItemProps {
   title: string;
@@ -24,10 +33,16 @@ const CartItem: FC<CartItemProps> = ({
   const dispatch = useAppDispatch();
 
   const handleRemoveItem = () => {
-    console.log('removing item', index);
     dispatch(removeCartItem(index));
   };
 
+  const handleIncreaseItemAmount = () => {
+    dispatch(increaseItemAmount(index));
+  };
+
+  const handleDecreaseItemAmount = () => {
+    dispatch(decreaseItemAmount(index));
+  };
   return (
     <section className={styles.item}>
       <img src={image} alt={title} className={styles.item__image} />
@@ -36,14 +51,24 @@ const CartItem: FC<CartItemProps> = ({
         <div className={styles.item__details}>
           <Headline level="1">{price}</Headline>
 
-          <Text className={styles.title}>{title}</Text>
+          <Text className={styles.item__title}>{title}</Text>
         </div>
 
         <div className={styles.item__actions}>
-          <Text>{amount}</Text>
+          <div className={styles.item__amount}>
+            <IconButton onClick={handleDecreaseItemAmount}>
+              <Icon28MinusSquareOutline />
+            </IconButton>
+
+            <Text>{amount}</Text>
+
+            <IconButton onClick={handleIncreaseItemAmount}>
+              <Icon28AddSquareOutline></Icon28AddSquareOutline>
+            </IconButton>
+          </div>
 
           <IconButton onClick={handleRemoveItem}>
-            <Icon36Delete />
+            <Icon28Delete />
           </IconButton>
         </div>
       </div>

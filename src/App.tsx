@@ -1,5 +1,4 @@
 import {
-  AppRoot,
   SplitLayout,
   SplitCol,
   View,
@@ -8,7 +7,6 @@ import {
   Header,
   Group,
   usePlatform,
-  SimpleCell,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import './App.css';
@@ -25,7 +23,10 @@ const App = () => {
         <View activePanel="main">
           <Panel id="main">
             <PanelHeader>VKUI</PanelHeader>
-            <Group header={<Header mode="secondary">Items</Header>}>
+            <Group
+              // className={'.group'} do something
+              header={<Header mode="secondary">Items</Header>}
+            >
               <CheckoutPage />
             </Group>
           </Panel>

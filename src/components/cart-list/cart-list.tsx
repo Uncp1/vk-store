@@ -1,4 +1,4 @@
-import { List, Spinner } from '@vkontakte/vkui';
+import { List, Separator, Spacing, Spinner } from '@vkontakte/vkui';
 import { FC, useEffect } from 'react';
 import styles from './cart-list.module.css';
 import CartItem from '../cart-item/cart-item';
@@ -17,14 +17,21 @@ const CartList: FC = () => {
     <List className={styles.list}>
       {cart.length > 0 ? (
         cart.map((item, index) => (
-          <CartItem
-            title={item.title}
-            price={item.price}
-            image={item.image}
-            key={index}
-            index={index}
-            amount={1}
-          />
+          <>
+            <CartItem
+              title={item.title}
+              price={item.price}
+              image={item.image}
+              key={index}
+              index={index}
+              amount={item.amount}
+            />
+            {index < cart.length - 1 && (
+              <Spacing size={24}>
+                <Separator wide={false} />
+              </Spacing>
+            )}
+          </>
         ))
       ) : (
         <Spinner size="medium" style={{ margin: '20px 0' }} />
