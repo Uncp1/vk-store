@@ -47,7 +47,7 @@ const CartList: FC = () => {
 
           <p>Чтобы найти товары, загляните в каталог</p>
 
-          <Button onClick={handleGoHome} stretched mode="secondary" size="m">
+          <Button onClick={handleGoHome} mode="secondary" size="l">
             На главную
           </Button>
         </Div>

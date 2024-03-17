@@ -10,10 +10,11 @@ import {
 } from '../../services/slices/cart-slice';
 import {
   Icon28AddSquareOutline,
+  Icon28DeleteOutline,
   Icon28MinusSquareOutline,
-  Icon36Delete,
 } from '@vkontakte/icons';
-import { createSelector } from '@reduxjs/toolkit';
+import { selectCartItemByIndex } from '../../utils/selectors';
+import { truncateString } from '../../utils/helpers';
 
 export interface CartItemProps {
   title: string;
@@ -26,11 +27,6 @@ export interface CartItemProps {
   description: string;
   rating?: { rate: number; count: number };
 }
-const selectCartItemByIndex = createSelector(
-  (state) => state.cart.cart,
-  (_, index) => index,
-  (cart, index) => cart[index]
-);
 
 const CartItem: FC<CartItemProps> = ({
   title = 'Shrek',
@@ -54,14 +50,26 @@ const CartItem: FC<CartItemProps> = ({
   const handleDecreaseItemAmount = () => {
     dispatch(decreaseItemAmount(index));
   };
+
+  const truncatedDescription = truncateString(description, 240);
+  const truncatedTitle = truncateString(title, 80);
   return (
     <section className={styles.item}>
       <img src={image} alt={title} className={styles.item__image} />
 
       <div className={styles.item__card}>
         <div className={styles.item__details}>
-          <Text className={styles.item__title}>{title}</Text>
-          <Text className={styles.item__description}>{description}</Text>
+          <Text className={styles.item__title}>{truncatedTitle}</Text>
+          <Text className={styles.item__description}>
+            {truncatedDescription}
+          </Text>
+
+          <IconButton
+            aria-label="Удалить товар из корзины"
+            onClick={handleRemoveItem}
+          >
+            <Icon28DeleteOutline />
+          </IconButton>
         </div>
 
         <div className={styles.item__actions}>
@@ -76,6 +84,7 @@ const CartItem: FC<CartItemProps> = ({
 
           <div className={styles.item__amount}>
             <IconButton
+              aria-label="Уменьшить количество товара"
               className={item.amount > 1 ? styles.item__button_enabled : ''}
               disabled={item.amount > 1 ? false : true}
               onClick={item.amount > 1 ? handleDecreaseItemAmount : () => {}}
@@ -86,6 +95,7 @@ const CartItem: FC<CartItemProps> = ({
             <Text>{amount}</Text>
 
             <IconButton
+              aria-label="Увеличить количество товара"
               className={item.amount < 10 ? styles.item__button_enabled : ''}
               disabled={item.amount < 10 ? false : true}
               onClick={item.amount < 10 ? handleIncreaseItemAmount : () => {}}
@@ -93,10 +103,6 @@ const CartItem: FC<CartItemProps> = ({
               <Icon28AddSquareOutline />
             </IconButton>
           </div>
-
-          <IconButton onClick={handleRemoveItem}>
-            <Icon36Delete />
-          </IconButton>
         </div>
       </div>
     </section>

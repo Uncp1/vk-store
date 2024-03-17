@@ -7,9 +7,10 @@ import {
   Header,
   Group,
   usePlatform,
+  Headline,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-import './App.css';
+import styles from './App.module.css';
 import CheckoutPage from './pages/checkout/checkout';
 
 const App = () => {
@@ -24,8 +25,19 @@ const App = () => {
           <Panel id="main">
             <PanelHeader>MyMarket</PanelHeader>
             <Group
-              // className={'.group'} do something
-              header={<Header>Корзина</Header>}
+              className={styles.group}
+              header={
+                <Header>
+                  <Headline
+                    Component={'h1'}
+                    level="1"
+                    weight="1"
+                    className={styles.headline}
+                  >
+                    Ваша Корзина
+                  </Headline>
+                </Header>
+              }
             >
               <CheckoutPage />
             </Group>
