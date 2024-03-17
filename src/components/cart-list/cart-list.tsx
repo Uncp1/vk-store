@@ -1,28 +1,34 @@
-import { List, Separator, Spacing, Spinner } from '@vkontakte/vkui';
-import { FC, useEffect } from 'react';
+import {
+  Button,
+  Div,
+  Headline,
+  List,
+  Separator,
+  Spacing,
+} from '@vkontakte/vkui';
+import { FC, Fragment } from 'react';
 import styles from './cart-list.module.css';
 import CartItem from '../cart-item/cart-item';
-import { useAppDispatch, useAppSelector } from '../../services/hooks/hooks';
-import { fetchFakeCart } from '../../services/slices/cart-slice';
+import { useAppSelector } from '../../services/hooks/hooks';
 
 const CartList: FC = () => {
-  const dispatch = useAppDispatch();
   const { cart } = useAppSelector((state) => state.cart);
 
-  useEffect(() => {
-    dispatch(fetchFakeCart());
-  }, [dispatch]);
+  const handleGoHome = () => {
+    // redirect to home page
+    console.log('homepage');
+  };
 
   return (
     <List className={styles.list}>
       {cart.length > 0 ? (
         cart.map((item, index) => (
-          <>
+          <Fragment key={index}>
             <CartItem
               title={item.title}
               price={item.price}
               image={item.image}
-              key={index}
+              description={item.description}
               index={index}
               amount={item.amount}
             />
@@ -31,10 +37,20 @@ const CartList: FC = () => {
                 <Separator wide={false} />
               </Spacing>
             )}
-          </>
+          </Fragment>
         ))
       ) : (
-        <Spinner size="medium" style={{ margin: '20px 0' }} />
+        <Div className={styles.cart_empty}>
+          <Headline className={styles.item__text} level="1">
+            Ваша корзина пуста
+          </Headline>
+
+          <p>Чтобы найти товары, загляните в каталог</p>
+
+          <Button onClick={handleGoHome} stretched mode="secondary" size="m">
+            На главную
+          </Button>
+        </Div>
       )}
     </List>
   );

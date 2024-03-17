@@ -49,7 +49,7 @@ const cartSlice = createSlice({
       .addCase(fetchFakeCart.fulfilled, (state, action) => {
         state.cart = action.payload;
       })
-      .addCase(fetchFakeCart.rejected, (state, action) => {
+      .addCase(fetchFakeCart.rejected, (state) => {
         state.isLoading = false;
       });
   },

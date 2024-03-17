@@ -1,6 +1,16 @@
+.cart__checkout {
+  display: flex;
+  flex-direction: column;
+}
+
 .cart__total {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 24px 24px;
+  padding: 28px 24px;
+}
+
+.cart__button {
+  max-width: 240px;
+  align-self: center;
 }

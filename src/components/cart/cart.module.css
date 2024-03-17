@@ -4,7 +4,7 @@
   grid-template-columns: 3fr 1fr;
   gap: 10px;
   position: relative;
-  border-top: 1px solid var(--vkui--color_text_primary);
+  border-top: 1px solid rgba(144, 148, 153, 0.4);
 }
 
 .cart::after {
@@ -13,9 +13,13 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background-color: var(--vkui--color_text_primary);
+  background-color: rgba(144, 148, 153, 0.4);
 }
 
 .cart::after {
   right: 25%; /* Adjust based on your grid layout */
+}
+
+.spinner {
+  position: fixed;
 }

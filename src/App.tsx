@@ -22,10 +22,10 @@ const App = () => {
       <SplitCol autoSpaced>
         <View activePanel="main">
           <Panel id="main">
-            <PanelHeader>VKUI</PanelHeader>
+            <PanelHeader>MyMarket</PanelHeader>
             <Group
               // className={'.group'} do something
-              header={<Header mode="secondary">Items</Header>}
+              header={<Header>Корзина</Header>}
             >
               <CheckoutPage />
             </Group>
